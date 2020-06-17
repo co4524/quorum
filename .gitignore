@@ -1,0 +1,8 @@
+configure.json
+node_modules/
+res/
+data/
+rec_data/
+config/
+graph/
+process_log/

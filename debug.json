@@ -1,0 +1,123 @@
+{
+  "setting": {
+    "year": "2020",
+    "raw_transaction_num": "120001",
+    "nonce_increase_model": 0,
+    "process_sleep": 60,
+    "python_version": "python3.7",
+    "block_time": "5",
+    "global_queue_size": "2048",
+    "consensus": "quorum",
+    "gcloud_proj_name": "caideyi",
+    "dispatcher_name": "q-workloader2",
+    "instance_name": "quorum",
+    "node_num": 8,
+    "model": "8node",
+    "model_list": [
+      "1node"
+    ],
+    "port": {
+      "web_socket": 22000,
+      "rpc": 20200,
+      "node": 30300,
+      "check_point": 30300
+    },
+    "node_number_list": [
+      1
+    ],
+    "region": "global",
+    "duration_time": 60,
+    "des_address": "0x6666666666666666666666666666666666666666",
+    "sleep_time": 60,
+    "transaction_rate": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      1000,
+      1100,
+      1200
+    ],
+    "micro_graph": {
+      "ref_node": "node0/microData",
+      "start": 0,
+      "end": 0
+    },
+    "fail_dir": "fail",
+    "x_axis_extend_ratio": 1.2,
+    "y_axis_extend_ratio": 1.2
+  },
+  "region": {
+    "asia-east1-b": "10.140.1",
+    "asia-southeast1-b": "10.148.1",
+    "europe-west1-b": "10.132.1",
+    "us-east1-b": "10.142.1"
+  },
+  "node": {
+    "log": "log",
+    "micro_data": "microData"
+  },
+  "quorum": {
+    "path": {
+      "account": "/home/caideyi/benchmark_v2/quorum/res/account.json",
+      "raw_transaction": "/home/caideyi/benchmark_v2/quorum/res/raw_transaction.json",
+      "node_config": "/home/caideyi/testnet",
+      "rec_data": "/home/caideyi/benchmark_v2/quorum/rec_data",
+      "report_path": "/home/caideyi/report",
+      "result": "/home/caideyi/report"
+    },
+    "urls": [
+      "http://10.140.1.0:26657",
+      "http://10.148.1.0:26657",
+      "http://10.132.1.0:26657",
+      "http://10.142.1.0:26657",
+      "http://10.140.1.1:26657",
+      "http://10.148.1.1:26657",
+      "http://10.132.1.1:26657",
+      "http://10.142.1.1:26657"
+    ],
+    "nodeIp": [
+      "10.140.1.0",
+      "10.148.1.0",
+      "10.132.1.0",
+      "10.142.1.0",
+      "10.140.1.1",
+      "10.148.1.1",
+      "10.132.1.1",
+      "10.142.1.1"
+    ]
+  },
+  "raft": {
+    "path": {
+      "account": "/home/caideyi/benchmark_v2/quorum/res/account.json",
+      "raw_transaction": "/home/caideyi/benchmark_v2/quorum/res/raw_transaction.json",
+      "node_config": "/home/caideyi/raft-testnet",
+      "rec_data": "/home/caideyi/benchmark_v2/raft/rec_data",
+      "report_path": "/home/caideyi/repo-raft",
+      "result": "/home/caideyi/repo-raft"
+    },
+    "urls": [
+      "http://10.140.3.0:26657",
+      "http://10.148.1.0:26657",
+      "http://10.132.1.0:26657",
+      "http://10.142.1.0:26657"
+    ],
+    "nodeIp": [
+      "10.140.3.0",
+      "10.148.1.0",
+      "10.132.1.0",
+      "10.142.1.0"
+    ],
+    "doc": {
+      "register": "/home/caideyi/benchmark_v2/raft/res/register.json",
+      "register_v2": "/home/caideyi/benchmark_v2/raft/res/register_v2.json",
+      "create_rawTx": "/home/caideyi/benchmark_v2/raft/res/createRawTx.json",
+      "log_rawTx": "/home/caideyi/benchmark_v2/raft/res/logRawTx.json"
+    }
+  }
+}

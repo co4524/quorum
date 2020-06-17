@@ -1,0 +1,65 @@
+#!/usr/bin/node
+
+const cmd = require("child_process").execSync;
+const fs = require("fs");
+const path = require("path");
+const account = Object.keys(require('../../../../quorum/res/account.json'))
+const ip = require('../../../../configure.json').raft.nodeIp
+
+const [CONSENSUS_PROTOCOL, NODES_PATH, LEADER_NODE_ID] = process.argv.slice(2);
+
+const is_raft = "raft" === CONSENSUS_PROTOCOL;
+
+/*
+ * Update static-nodes.json
+ */
+
+const nodes = JSON.parse(fs.readFileSync(`${NODES_PATH}/node${LEADER_NODE_ID}/static-nodes.json`, "utf-8")).map(
+  (node, nid) =>
+    node.replace(/@0\.0\.0\.0:(\d{3})\d{2}(\?discport=0)/, (match, p1, p2) => {
+      const portPostfix = `0`.padStart(2, "0");
+
+      return `@${ip[nid]}:${p1}${portPostfix}${p2}${is_raft ? `&raftport=500${portPostfix}` : ""}`;
+    }),
+);
+fs.writeFileSync(`${NODES_PATH}/node${LEADER_NODE_ID}/static-nodes.json`, JSON.stringify(nodes, null, 2));
+
+/*
+ * Update genesis.json
+ */
+
+const genesis_path = is_raft
+  ? path.resolve(__dirname, "./default-configs/genesis-raft.json")
+  : `${NODES_PATH}/node${LEADER_NODE_ID}/genesis.json`;
+
+const genesis = JSON.parse(fs.readFileSync(genesis_path, "utf-8"));
+const balance = Object.values(genesis.alloc)[0].balance;
+
+const alloc = {};
+
+for ( i = 0 ; i < account.length ; i++ ) {
+  alloc[account[i]] = { balance };
+}
+genesis["gasLimit"] = "0x501EBE0"
+// genesis["petersburgBlock"] = 0
+// genesis["istanbulBlock"] = 0
+// genesis["maxCodeSizeConfig"] = [
+// {
+//     "block" : 5,
+//     "size" : 35
+// },
+// {
+//     "block" : 15,
+//     "size" : 24
+// },
+// {
+//     "block" : 20,
+//     "size" : 35
+// }]
+
+fs.writeFileSync(
+  `${NODES_PATH}/node${LEADER_NODE_ID}/genesis.json`,
+  JSON.stringify(Object.assign(genesis, { alloc }), null, 2),
+);
+
+// vi:ft=javascript
